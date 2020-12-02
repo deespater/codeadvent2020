@@ -1,5 +1,4 @@
 from utils import (
-    cast_list_to_integer,
     read_file_into_list,
     validate_result,
 )
@@ -7,8 +6,7 @@ from utils import (
 class TestDay01:
     @classmethod
     def setup_class(cls):
-        cls.input_data = read_file_into_list('./inputs/01.txt')
-        cls.input_data = cast_list_to_integer(cls.input_data)
+        cls.input_data = read_file_into_list('./inputs/01.txt', cast_to_number=True)
 
     @validate_result(918339)
     def test_challenge_01(self):
