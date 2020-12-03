@@ -41,4 +41,4 @@ class TestDay02:
     @validate_result(275)
     def test_challenge_02(self):
         valid_lines = [line for line in self.input_data if self.is_line_valid_v2(line)]
-        print(len(valid_lines))
+        return len(valid_lines)
