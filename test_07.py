@@ -40,7 +40,7 @@ class TestDay06:
         inner_bag_matches = re.findall(INNER_BAG_REGEXP, match_groups['inner_bags'])
         for inner_bag_match in inner_bag_matches:
             inner_rules.update({
-                inner_bag_match[1]: inner_bag_match[0]
+                inner_bag_match[1]: int(inner_bag_match[0])
             })
 
         return {
@@ -62,10 +62,20 @@ class TestDay06:
                 if color_to_find == nested_color:
                     found_colors.append(root_color or color)
                 else:
-                    inner_colors = self.find_bag(color_to_find, [nested_color], root_color or color)
-                    found_colors += inner_colors
+                    nested_colors = self.find_bag(color_to_find, [nested_color], root_color or color)
+                    found_colors += nested_colors
 
         return list(set(found_colors))
+
+    def calculate_bags(self, color, parent_count = 1):
+        child_bags = self.rules[color]
+
+        count = 1
+        for child_color, child_count in child_bags.items():
+            count += self.calculate_bags(child_color, child_count)
+
+        return parent_count * count
+
 
     @validate_result(164)
     def test_challenge_01(self):
@@ -73,3 +83,10 @@ class TestDay06:
 
         needed_bags = self.find_bag(bag_to_carry)
         return len(needed_bags)
+
+    @validate_result(7872)
+    def test_challenge_02(self):
+        bag_to_carry = 'shiny gold'
+
+        needed_bags = self.calculate_bags(bag_to_carry)
+        return needed_bags - 1
