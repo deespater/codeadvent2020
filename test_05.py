@@ -3,7 +3,7 @@ from utils import (
     validate_result,
 )
 
-class TestDay04:
+class TestDay05:
     ROWS_MAX = 127
     COLS_MAX = 7
 
