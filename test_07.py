@@ -5,19 +5,13 @@ from utils import (
     validate_result,
 )
 
-
-# BAG_REGEXP = r'\w+ \w+ bags contain'
-# INNER_BAG_REGEXP = r'\s\d\s\w+\s\w+\sbag(s?)(,|\.)'
-# NO_INNER_BAG_REGEXP = r'\sno other bags\.'
-# REGEXP = f'^{BAG_REGEXP}((({INNER_BAG_REGEXP})+)|({NO_INNER_BAG_REGEXP}))$'
-
 BAG_REGEXP = r'(?P<bag_color>\w+\s\w+) bags contain'
 INNER_BAG_REGEXP = r'\s(?P<inner_bag_count>\d)\s(?P<inner_bag_color>\w+\s\w+)\sbag(s?)(,|\.)'
 NO_INNER_BAG_REGEXP = r'\sno other bags\.'
 REGEXP = f'^{BAG_REGEXP}(?P<inner_bags>(({INNER_BAG_REGEXP})+)|({NO_INNER_BAG_REGEXP}))$'
 
 
-class TestDay06:
+class TestDay07:
     @classmethod
     def setup_class(cls):
         input_data = read_file_into_list('./inputs/07.txt')
@@ -28,7 +22,6 @@ class TestDay06:
             rules.update(cls.parse_rule_line(rule_line))
 
         cls.rules = rules
-        # print(cls.rules)
 
     @classmethod
     def parse_rule_line(cls, rule_line):
